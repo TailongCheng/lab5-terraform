@@ -8,25 +8,43 @@ resource "aws_vpc" "cheng_vpc" {
   }
 }
 
-resource "aws_subnet" "aws_public_subnets" {
-  count             = length(var.aws_public_subnet_cidrs)
+resource "aws_subnet" "aws_public_subnet_1" {
   vpc_id            = aws_vpc.cheng_vpc.id
-  cidr_block        = element(var.aws_public_subnet_cidrs, count.index)
-  availability_zone = element(var.aws_azs, count.index)
+  cidr_block        = var.aws_public_subnet_cidr_1
+  availability_zone = var.aws_az_1
 
   tags = {
-    Name = "cheng_public_subnet $(count.index + 1)"
+    Name = "cheng_public_subnet_1"
   }
 }
 
-resource "aws_subnet" "aws_private_subnets" {
-  count             = length(var.aws_private_subnet_cidrs)
+resource "aws_subnet" "aws_public_subnet_2" {
   vpc_id            = aws_vpc.cheng_vpc.id
-  cidr_block        = element(var.aws_private_subnet_cidrs, count.index)
-  availability_zone = element(var.aws_azs, count.index)
+  cidr_block        = var.aws_public_subnet_cidr_2
+  availability_zone = var.aws_az_2
 
   tags = {
-    Name = "Cheng_private_subnet $(count.index + 1)"
+    Name = "cheng_public_subnet_2"
+  }
+}
+
+resource "aws_subnet" "aws_private_subnet_1" {
+  vpc_id            = aws_vpc.cheng_vpc.id
+  cidr_block        = var.aws_private_subnet_cidr_1
+  availability_zone = var.aws_az_1
+
+  tags = {
+    Name = "Cheng_private_subnet_1"
+  }
+}
+
+resource "aws_subnet" "aws_private_subnet_2" {
+  vpc_id            = aws_vpc.cheng_vpc.id
+  cidr_block        = var.aws_private_subnet_cidr_2
+  availability_zone = var.aws_az_2
+
+  tags = {
+    Name = "Cheng_private_subnet_2"
   }
 }
 
@@ -51,9 +69,13 @@ resource "aws_route_table" "aws_pub_rt" {
   }
 }
 
-resource "aws_route_table_association" "aws_pub_sub_assoc" {
-  count             = length(var.aws_public_subnet_cidrs)
-  subnet_id         = element(aws_subnet.aws_public_subnets[*].id, count.index)
+resource "aws_route_table_association" "aws_pub_sub_assoc_1" {
+  subnet_id         = aws_subnet.aws_public_subnet_1.id
+  route_table_id    = aws_route_table.aws_pub_rt.id
+}
+
+resource "aws_route_table_association" "aws_pub_sub_assoc_2" {
+  subnet_id         = aws_subnet.aws_public_subnet_2.id
   route_table_id    = aws_route_table.aws_pub_rt.id
 }
 
@@ -73,7 +95,7 @@ resource "aws_security_group" "aws_sg" {
 resource "aws_instance" "app_server" {
   ami           = "ami-051f8a213df8bc089"
   instance_type = "t2.micro"
-  subnet_id     = aws_subnet.aws_public_subnets[0].id
+  subnet_id     = aws_subnet.aws_public_subnet_1.id
 
   security_groups = aws_security_group.aws_sg.id
 
