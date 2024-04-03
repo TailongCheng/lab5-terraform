@@ -19,9 +19,10 @@ provider "google" {
   project                 = "inft-1209-lab5"
   region                  = "us-central1"
   zone                    = "us-central1-a"
+  file                  = ".json"
 }
 
-provider "azure" {
+provider "azurerm" {
   features {}
   client_id               = var.azure_client_id
   client_secret           = var.azure_client_secret
