@@ -73,7 +73,7 @@ resource "aws_security_group" "aws_sg" {
 resource "aws_instance" "app_server" {
   ami           = "ami-051f8a213df8bc089"
   instance_type = "t2.micro"
-  subnet_id     = aws_subnet.aws_public_subnets.ids[0]
+  subnet_id     = aws_subnet.aws_public_subnets[0].id
 
   security_groups = aws_security_group.aws_sg.id
 
