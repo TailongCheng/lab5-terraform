@@ -38,13 +38,39 @@ variable "aws_az_2" {
 ## GCP Variables
 
 variable "public_subnet_cidr" {
+  type        = string
   description = "CIDR range for the public subnet"
   default     = "10.0.10.0/24"
 }
 
 variable "private_subnet_cidr" {
+  type        = string
   description = "CIDR range for the private subnet"
   default     = "10.0.20.0/24"
 }
 
 ## Azure Variables
+
+variable "azure_client_id" {
+  description = "The Client ID of the Azure Active Directory application."
+  type        = string
+  default     = "your_default_client_id"
+}
+
+variable "azure_client_secret" {
+  description = "The Client Secret (password) of the Azure Active Directory appl     ication."
+  type        = string
+  default     = "your_default_client_secret"
+}
+
+variable "azure_subscription_id" {
+  description = "The Subscription ID of your Azure account."
+  type        = string
+  default     = "your_default_subscription_id"
+}
+
+variable "azure_tenant_id" {
+  description = "The Tenant ID of your Azure Active Directory."
+  type        = string
+  default     = "your_default_tenant_id"
+}
