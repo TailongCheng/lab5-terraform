@@ -97,7 +97,7 @@ resource "aws_instance" "app_server" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.aws_public_subnet_1.id
 
-  security_groups = aws_security_group.aws_sg.id
+  security_groups = [aws_security_group.aws_sg.id]
 
   tags = {
     Name = "ExampleAppServerInstance"
