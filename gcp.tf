@@ -1,24 +1,24 @@
 ## VPC
 ## -------------------------
 resource "google_compute_network" "vpc-network" {
-  project                 = "assignment2-418411"
+  project                 = "inft-1209-lab5"
   name                    = "cheng-network"
   auto_create_subnetworks = "false"
-  # routing_mode            = "REGIONAL"
+  routing_mode            = "REGIONAL"
 }
 
 resource "google_compute_subnetwork" "public-subnet" {
-  project                 = "assignment2-418411"
+  project                 = "inft-1209-lab5"
   name                    = "cheng-pub-subnet"
-  ip_cidr_range           = "10.0.10.0/24"
+  ip_cidr_range           = var.gcp_public_subnet_cidr
   network                 = google_compute_network.vpc-network.id
   region                  = "us-central1"
 }
 
 resource "google_compute_subnetwork" "private-subnet" {
-  project                 = "assignment2-418411"
+  project                 = "inft-1209-lab5"
   name                    = "cheng-pri-subnet"
-  ip_cidr_range           = "10.0.20.0/24"
+  ip_cidr_range           = var.gcp_private_subnet_cidr
   network                 = google_compute_network.vpc-network.id
   region                  = "us-central1"
 }
@@ -43,7 +43,7 @@ resource "google_compute_firewall" "container-allow-port8080" {
     protocol              = "tcp"
     ports                 = ["80"]
   }
-  priority              = 110
+  priority              = 100
   description           = "Allow HTTP Port 8080 traffic for web servers."
   source_ranges         = ["0.0.0.0/0"]
 }
@@ -89,21 +89,8 @@ resource "google_compute_instance" "vm-container" {
 
   boot_disk {
     initialize_params {
-      image               = "cos-cloud/cos-101-17162-386-57"
+      image               = "debian-12-bookworm-v20240312"
     }
-  }
-
-  ## Start Image is not required for the lab, but there is always some error in the CI/CD process without metadata.
-  metadata = {
-    gce-container-declaration = <<EOT
-    spec:
-      containers:
-      - name: flaskapp-container
-        image: 'us-central1-docker.pkg.dev/assignment2-418411/cheng-repo/flaskapp@sha256:bee94644cf39a29d506be2779d50509573b7ad2074626fbed79907a5fa74093b'
-        stdin: false
-        tty: false
-      restartPolicy: Always
-    EOT
   }
 
   network_interface {
@@ -113,24 +100,4 @@ resource "google_compute_instance" "vm-container" {
       // Ephemeral public IP
     }
   }
-
-  service_account {
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email                 = "764950655405-compute@developer.gserviceaccount.com"
-    scopes = [
-      "https://www.googleapis.com/auth/cloud-platform",
-      "https://www.googleapis.com/auth/cloud-platform.read-only"
-  ]
-  }
-}
-
-## Project IAM Binding
-## -------------------------
-resource "google_project_iam_binding" "instance_editor_binding" {
-  project                 = "assignment2-418411"
-  role                    = "roles/editor"
-
-  members = [
-    "serviceAccount:764950655405-compute@developer.gserviceaccount.com",
-  ]
 }

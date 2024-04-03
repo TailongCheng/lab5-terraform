@@ -15,7 +15,7 @@ provider "aws" {
 }
 
 provider "google" {
-  project                 = "assignment2-418411"
+  project                 = "inft-1209-lab5"
   region                  = "us-central1"
   zone                    = "us-central1-a"
 }

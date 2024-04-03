@@ -71,7 +71,7 @@ resource "aws_security_group" "" {
 }
 
 resource "aws_instance" "app_server" {
-  ami           = "ami-830c94e3"
+  ami           = "ami-051f8a213df8bc089"
   instance_type = "t2.micro"
 
   tags = {
