@@ -26,7 +26,7 @@ provider "google" {
   project                 = "inft-1209-lab5"
   region                  = "us-central1"
   zone                    = "us-central1-a"
-  file                    = "/home/ec2-user/lab5-terraform/inft-1209-lab5-958d04a83f34.json"
+  credentials             = file("/home/ec2-user/lab5-terraform/inft-1209-lab5-958d04a83f34.json")
 }
 
 provider "azurerm" {
