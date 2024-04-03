@@ -27,7 +27,7 @@ provider "google" {
   project                 = "inft-1209-lab5"
   region                  = "us-central1"
   zone                    = "us-central1-a"
-  file                  = ".json"
+  # file                    = "/test.json"
 }
 
 provider "azurerm" {
