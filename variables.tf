@@ -37,13 +37,13 @@ variable "aws_az_2" {
 
 ## GCP Variables
 
-variable "public_subnet_cidr" {
+variable "gcp_public_subnet_cidr" {
   type        = string
   description = "CIDR range for the public subnet"
   default     = "10.0.10.0/24"
 }
 
-variable "private_subnet_cidr" {
+variable "gcp_private_subnet_cidr" {
   type        = string
   description = "CIDR range for the private subnet"
   default     = "10.0.20.0/24"
