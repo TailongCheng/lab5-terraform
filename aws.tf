@@ -46,7 +46,7 @@ resource "aws_route_table" "aws_pub_rt" {
     gateway_id      = aws_internet_gateway.cheng_ig.id
   }
 
-  tag = {
+  tags = {
     Name = "cheng_pub_rt"
   }
 }
@@ -58,7 +58,7 @@ resource "aws_route_table_association" "aws_pub_sub_assoc" {
 }
 
 resource "aws_security_group" "aws_sg" {
-  Name              = "BastionHostSG"
+  name              = "BastionHostSG"
   description       = "Allow SSH"
   vpc_id            = aws_vpc.cheng_vpc.id
 
@@ -66,7 +66,7 @@ resource "aws_security_group" "aws_sg" {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    cidr_block      = ["0.0.0.0/0"]
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 }
 
