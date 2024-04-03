@@ -57,7 +57,7 @@ resource "aws_route_table_association" "aws_pub_sub_assoc" {
   route_table_id    = aws_route_table.aws_pub_rt.id
 }
 
-resource "aws_security_group" "" {
+resource "aws_security_group" "aws_sg" {
   Name
   description
   vpc_id
