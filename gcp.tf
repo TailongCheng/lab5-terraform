@@ -26,7 +26,7 @@ resource "google_compute_subnetwork" "private-subnet" {
 ## Firewall Rule
 ## -------------------------
 resource "google_compute_firewall" "allow-icmp" {
-  name                    = "lab5-allow-http"
+  name                    = "lab5-allow-icmp"
   network                 = google_compute_network.vpc-network.name
   allow {
     protocol              = "icmp"
@@ -44,7 +44,7 @@ resource "google_compute_firewall" "allow-http" {
     ports                 = ["80"]
   }
   priority              = 100
-  description           = "Allow HTTP Port 8080 traffic for web servers."
+  description           = "Allow HTTP Port 80 traffic for web servers."
   source_ranges         = ["0.0.0.0/0"]
 }
 
