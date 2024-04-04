@@ -25,8 +25,8 @@ resource "google_compute_subnetwork" "private-subnet" {
 
 ## Firewall Rule
 ## -------------------------
-resource "google_compute_firewall" "container-allow-icmp" {
-  name                    = "container-allow-http"
+resource "google_compute_firewall" "allow-icmp" {
+  name                    = "lab5-allow-http"
   network                 = google_compute_network.vpc-network.name
   allow {
     protocol              = "icmp"
@@ -36,8 +36,8 @@ resource "google_compute_firewall" "container-allow-icmp" {
   source_ranges           = ["0.0.0.0/0"]
 }
 
-resource "google_compute_firewall" "container-allow-port8080" {
-  name                    = "container-allow-http"
+resource "google_compute_firewall" "allow-http" {
+  name                    = "lab5-allow-http"
   network                 = google_compute_network.vpc-network.name
   allow {
     protocol              = "tcp"
@@ -48,8 +48,8 @@ resource "google_compute_firewall" "container-allow-port8080" {
   source_ranges         = ["0.0.0.0/0"]
 }
 
-resource "google_compute_firewall" "container-allow-ssh" {
-  name                    = "container-allow-ssh"
+resource "google_compute_firewall" "allow-ssh" {
+  name                    = "lab5-allow-ssh"
   network                 = google_compute_network.vpc-network.name
   allow {
     protocol              = "tcp"
