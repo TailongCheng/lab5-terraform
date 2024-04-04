@@ -2,5 +2,5 @@
 ## -------------------------
 resource "azurerm_resource_group" "rg" {
   name     = "myTFResourceGroup"
-  location = "eastus1"
+  location = "eastus"
 }
