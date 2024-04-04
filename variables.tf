@@ -50,5 +50,8 @@ variable "gcp_private_subnet_cidr" {
 }
 
 ## Azure Variables
-
-## using export in AWS EC2
+variable "resource_group_location" {
+  type        = string
+  default     = "eastus"
+  description = "Location of the resource group."
+}
