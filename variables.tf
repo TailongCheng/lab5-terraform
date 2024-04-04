@@ -51,26 +51,4 @@ variable "gcp_private_subnet_cidr" {
 
 ## Azure Variables
 
-variable "azure_client_id" {
-  description = "The Client ID of the Azure Active Directory application."
-  type        = string
-  default     = "your_default_client_id"
-}
-
-variable "azure_client_secret" {
-  description = "The Client Secret (password) of the Azure Active Directory appl     ication."
-  type        = string
-  default     = "your_default_client_secret"
-}
-
-variable "azure_subscription_id" {
-  description = "The Subscription ID of your Azure account."
-  type        = string
-  default     = "your_default_subscription_id"
-}
-
-variable "azure_tenant_id" {
-  description = "The Tenant ID of your Azure Active Directory."
-  type        = string
-  default     = "your_default_tenant_id"
-}
+## using export in AWS EC2

@@ -26,13 +26,13 @@ provider "google" {
   project                 = "inft-1209-lab5"
   region                  = "us-central1"
   zone                    = "us-central1-a"
-  credentials             = file("/home/ec2-user/lab5-terraform/inft-1209-lab5-958d04a83f34.json")
+  credentials             = file("/home/ec2-user/inft-1209-lab5-958d04a83f34.json")
 }
 
 provider "azurerm" {
   features {}
-  client_id               = var.azure_client_id
-  client_secret           = var.azure_client_secret
-  subscription_id         = var.azure_subscription_id
-  tenant_id               = var.azure_tenant_id
+  client_id               = AZURE_CLIENT_ID
+  client_secret           = AZURE_CLIENT_SECRET
+  subscription_id         = AZURE_SUBSCRIPTION_ID
+  tenant_id               = AZURE_TENANT_ID
 }
