@@ -1,3 +1,10 @@
+## Basic Info
+variable "name" {
+  description = "Name for basic info"
+  type        = string
+  default     = "cheng"
+}
+
 ## AWS Variables
 variable "aws_public_subnet_cidr_1" {
   type        = string
