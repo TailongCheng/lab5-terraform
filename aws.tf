@@ -1,6 +1,6 @@
 ## Network
 ## -------------------------
-resource "aws_vpc" "cheng_vpc" {
+resource "aws_vpc" "aws_vpc" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
@@ -9,7 +9,7 @@ resource "aws_vpc" "cheng_vpc" {
 }
 
 resource "aws_subnet" "aws_public_subnet_1" {
-  vpc_id            = aws_vpc.cheng_vpc.id
+  vpc_id            = aws_vpc.aws_vpc.id
   cidr_block        = var.aws_public_subnet_cidr_1
   availability_zone = var.aws_az_1
 
@@ -19,7 +19,7 @@ resource "aws_subnet" "aws_public_subnet_1" {
 }
 
 resource "aws_subnet" "aws_public_subnet_2" {
-  vpc_id            = aws_vpc.cheng_vpc.id
+  vpc_id            = aws_vpc.aws_vpc.id
   cidr_block        = var.aws_public_subnet_cidr_2
   availability_zone = var.aws_az_2
 
@@ -29,7 +29,7 @@ resource "aws_subnet" "aws_public_subnet_2" {
 }
 
 resource "aws_subnet" "aws_private_subnet_1" {
-  vpc_id            = aws_vpc.cheng_vpc.id
+  vpc_id            = aws_vpc.aws_vpc.id
   cidr_block        = var.aws_private_subnet_cidr_1
   availability_zone = var.aws_az_1
 
@@ -39,7 +39,7 @@ resource "aws_subnet" "aws_private_subnet_1" {
 }
 
 resource "aws_subnet" "aws_private_subnet_2" {
-  vpc_id            = aws_vpc.cheng_vpc.id
+  vpc_id            = aws_vpc.aws_vpc.id
   cidr_block        = var.aws_private_subnet_cidr_2
   availability_zone = var.aws_az_2
 
@@ -48,8 +48,8 @@ resource "aws_subnet" "aws_private_subnet_2" {
   }
 }
 
-resource "aws_internet_gateway" "cheng_ig" {
-  vpc_id            = aws_vpc.cheng_vpc.id
+resource "aws_internet_gateway" "aws_ig" {
+  vpc_id            = aws_vpc.aws_vpc.id
 
   tags = {
     Name = "cheng_ig"
@@ -57,11 +57,11 @@ resource "aws_internet_gateway" "cheng_ig" {
 }
 
 resource "aws_route_table" "aws_pub_rt" {
-  vpc_id            = aws_vpc.cheng_vpc.id
+  vpc_id            = aws_vpc.aws_vpc.id
 
   route {
     cidr_block      = "0.0.0.0/0"
-    gateway_id      = aws_internet_gateway.cheng_ig.id
+    gateway_id      = aws_internet_gateway.aws_ig.id
   }
 
   tags = {
@@ -82,7 +82,7 @@ resource "aws_route_table_association" "aws_pub_sub_assoc_2" {
 resource "aws_security_group" "aws_sg" {
   name              = "BastionHostSG"
   description       = "Allow SSH"
-  vpc_id            = aws_vpc.cheng_vpc.id
+  vpc_id            = aws_vpc.aws_vpc.id
 
   ingress {
     from_port       = 22
