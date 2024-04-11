@@ -4,7 +4,7 @@ resource "aws_vpc" "aws_vpc" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "cheng_vpc"
+    Name = "${var.name}_vpc"
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_subnet" "aws_public_subnet_1" {
   availability_zone = var.aws_az_1
 
   tags = {
-    Name = "cheng_public_subnet_1"
+    Name = "${var.name}_public_subnet_1"
   }
 }
 
@@ -24,7 +24,7 @@ resource "aws_subnet" "aws_public_subnet_2" {
   availability_zone = var.aws_az_2
 
   tags = {
-    Name = "cheng_public_subnet_2"
+    Name = "${var.name}_public_subnet_2"
   }
 }
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "aws_private_subnet_1" {
   availability_zone = var.aws_az_1
 
   tags = {
-    Name = "Cheng_private_subnet_1"
+    Name = "${var.name}_private_subnet_1"
   }
 }
 
@@ -44,7 +44,7 @@ resource "aws_subnet" "aws_private_subnet_2" {
   availability_zone = var.aws_az_2
 
   tags = {
-    Name = "Cheng_private_subnet_2"
+    Name = "${var.name}_private_subnet_2"
   }
 }
 
@@ -52,7 +52,7 @@ resource "aws_internet_gateway" "aws_ig" {
   vpc_id            = aws_vpc.aws_vpc.id
 
   tags = {
-    Name = "cheng_ig"
+    Name = "${var.name}_ig"
   }
 }
 
@@ -65,7 +65,7 @@ resource "aws_route_table" "aws_pub_rt" {
   }
 
   tags = {
-    Name = "cheng_pub_rt"
+    Name = "${var.name}_pub_rt"
   }
 }
 
