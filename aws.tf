@@ -81,78 +81,78 @@ resource "aws_subnet" "aws_private_subnet_2" {
   }
 }
 
-# resource "aws_route_table" "aws_pri_rt_1" {
-#   vpc_id            = aws_vpc.aws_my_vpc.id
+resource "aws_route_table" "aws_pri_rt_1" {
+  vpc_id            = aws_vpc.aws_my_vpc.id
 
-#   route {
-#     cidr_block      = "0.0.0.0/0"
-#     gateway_id      = aws_nat_gateway.aws_nat_gw_1.id
-#   }
+  route {
+    cidr_block      = "0.0.0.0/0"
+    gateway_id      = aws_nat_gateway.aws_nat_gw_1.id
+  }
 
-#   tags = {
-#     Name = "${var.name}_pub_rt_1"
-#   }
-# }
+  tags = {
+    Name = "${var.name}_pub_rt_1"
+  }
+}
 
-# resource "aws_route_table" "aws_pri_rt_2" {
-#   vpc_id            = aws_vpc.aws_my_vpc.id
+resource "aws_route_table" "aws_pri_rt_2" {
+  vpc_id            = aws_vpc.aws_my_vpc.id
 
-#   route {
-#     cidr_block      = "0.0.0.0/0"
-#     gateway_id      = aws_nat_gateway.aws_nat_gw_2.id
-#   }
+  route {
+    cidr_block      = "0.0.0.0/0"
+    gateway_id      = aws_nat_gateway.aws_nat_gw_2.id
+  }
 
-#   tags = {
-#     Name = "${var.name}_pub_rt_2"
-#   }
-# }
+  tags = {
+    Name = "${var.name}_pub_rt_2"
+  }
+}
 
 # NAT Gateway # Can be comment out
-# resource "aws_eip" "aws_nat_eip_1" {
-#   vpc = true
+resource "aws_eip" "aws_nat_eip_1" {
+  vpc = true
 
-#   tags = {
-#     Name = "${var.name}_nat_eip_1"
-#   }
-# }
+  tags = {
+    Name = "${var.name}_nat_eip_1"
+  }
+}
 
-# resource "aws_eip" "aws_nat_eip_2" {
-#   vpc = true
+resource "aws_eip" "aws_nat_eip_2" {
+  vpc = true
 
-#   tags = {
-#     Name = "${var.name}_nat_eip_2"
-#   }
-# }
+  tags = {
+    Name = "${var.name}_nat_eip_2"
+  }
+}
 
-# resource "aws_nat_gateway" "aws_nat_gw_1" {
-#   allocation_id = aws_eip.aws_nat_eip.id
-#   subnet_id     = aws_subnet.aws_public_subnet_1.id
-#   depends_on    = [aws_internet_gateway.aws_ig]
+resource "aws_nat_gateway" "aws_nat_gw_1" {
+  allocation_id = aws_eip.aws_nat_eip.id
+  subnet_id     = aws_subnet.aws_public_subnet_1.id
+  depends_on    = [aws_internet_gateway.aws_ig]
 
-#   tags = {
-#     Name = "${var.name}_nat_gw_1"
-#   }
-# }
+  tags = {
+    Name = "${var.name}_nat_gw_1"
+  }
+}
 
-# resource "aws_nat_gateway" "aws_nat_gw_2" {
-#   allocation_id = aws_eip.aws_nat_eip.id
-#   subnet_id     = aws_subnet.aws_public_subnet_2.id
-#   depends_on    = [aws_internet_gateway.aws_ig]
+resource "aws_nat_gateway" "aws_nat_gw_2" {
+  allocation_id = aws_eip.aws_nat_eip.id
+  subnet_id     = aws_subnet.aws_public_subnet_2.id
+  depends_on    = [aws_internet_gateway.aws_ig]
 
-#   tags = {
-#     Name = "${var.name}_nat_gw_2"
-#   }
-# }
+  tags = {
+    Name = "${var.name}_nat_gw_2"
+  }
+}
 
-# resource "aws_route_table_association" "aws_pri_sub_assoc_1" {
-#   subnet_id         = aws_subnet.aws_private_subnet_1.id
-#   route_table_id    = aws_route_table.aws_pri_rt_1.id
-# }
+resource "aws_route_table_association" "aws_pri_sub_assoc_1" {
+  subnet_id         = aws_subnet.aws_private_subnet_1.id
+  route_table_id    = aws_route_table.aws_pri_rt_1.id
+}
 
-# resource "aws_route_table_association" "aws_pri_sub_assoc_2" {
-#   subnet_id         = aws_subnet.aws_private_subnet_2.id
-#   route_table_id    = aws_route_table.aws_pri_rt_2.id
-# }
+resource "aws_route_table_association" "aws_pri_sub_assoc_2" {
+  subnet_id         = aws_subnet.aws_private_subnet_2.id
+  route_table_id    = aws_route_table.aws_pri_rt_2.id
+}
 
 # Security Group
 resource "aws_security_group" "aws_sg" {
