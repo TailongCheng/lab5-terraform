@@ -159,7 +159,10 @@ resource "aws_lb" "aws_alb" {
   internal          = false
   load_balancer_type  = "application"
   security_groups   = [aws_security_group.aws_lb_sg.id]
-  subnets           = [for subnet in aws_subnet.public : subnet.id]
+  subnets           = [
+    aws_subnet.aws_public_subnet_1.id,
+    aws_subnet.aws_public_subnet_2.id
+  ]
 
   tags = {
     Environment = "production"
@@ -170,7 +173,7 @@ resource "aws_lb_target_group" "aws_app_tg" {
   name              = "app_target_group"
   port              = 80
   protocol          = "HTTP"
-  vpc_id            = "${aws_vpc.main.id}"
+  vpc_id            = "${aws_vpc.aws_my_vpc.id}"
 }
 
 resource "aws_lb_listener" "listener" {
