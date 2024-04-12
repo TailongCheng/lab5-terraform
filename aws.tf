@@ -177,7 +177,7 @@ resource "aws_lb_target_group" "aws_app_tg" {
 }
 
 resource "aws_lb_listener" "listener" {
-  load_balancer_arn = "${aws_lb.aws_app_tg.arn}"
+  load_balancer_arn = "${aws_lb.aws_alb.arn}"
   port              = "80"
   protocol          = "HTTP"
 
