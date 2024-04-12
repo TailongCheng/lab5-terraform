@@ -109,7 +109,7 @@ resource "aws_route_table" "aws_pri_rt_2" {
 
 # NAT Gateway # Can be comment out
 resource "aws_eip" "aws_nat_eip_1" {
-  vpc = true
+  domain = "vpc"
 
   tags = {
     Name = "${var.name}_nat_eip_1"
@@ -117,7 +117,7 @@ resource "aws_eip" "aws_nat_eip_1" {
 }
 
 resource "aws_eip" "aws_nat_eip_2" {
-  vpc = true
+  domain = "vpc"
 
   tags = {
     Name = "${var.name}_nat_eip_2"
@@ -125,7 +125,7 @@ resource "aws_eip" "aws_nat_eip_2" {
 }
 
 resource "aws_nat_gateway" "aws_nat_gw_1" {
-  allocation_id = aws_eip.aws_nat_eip.id
+  allocation_id = aws_eip.aws_nat_eip_1.id
   subnet_id     = aws_subnet.aws_public_subnet_1.id
   depends_on    = [aws_internet_gateway.aws_ig]
 
@@ -135,7 +135,7 @@ resource "aws_nat_gateway" "aws_nat_gw_1" {
 }
 
 resource "aws_nat_gateway" "aws_nat_gw_2" {
-  allocation_id = aws_eip.aws_nat_eip.id
+  allocation_id = aws_eip.aws_nat_eip_2.id
   subnet_id     = aws_subnet.aws_public_subnet_2.id
   depends_on    = [aws_internet_gateway.aws_ig]
 
